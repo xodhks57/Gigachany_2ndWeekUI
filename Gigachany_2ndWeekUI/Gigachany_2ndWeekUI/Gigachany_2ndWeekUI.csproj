@@ -65,6 +65,9 @@
     <Compile Include="Form1_Main.Designer.cs">
       <DependentUpon>Form1_Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="New_ProgressBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form3_ScreenShot.resx">

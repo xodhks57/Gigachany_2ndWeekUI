@@ -14,7 +14,12 @@ namespace Gigachany_2ndWeekUI
 
         public Form1_Main()
         {
-            InitializeComponent();
+			if (!ProgressBarRenderer.IsSupported)
+			{
+
+				this.progressBar1.BackColor = SystemColors.Control;
+			}
+			InitializeComponent();
 			Graph.Titles.Add("얼굴 표정 차트").Font = new Font("나눔스퀘어", 18F, FontStyle.Bold);
 			Graph.Series["표정"].Points.Clear();
 			Graph.Series["표정"].Points.AddXY("행복", 100);
@@ -24,8 +29,8 @@ namespace Gigachany_2ndWeekUI
 			Graph.Series["표정"].Points[0].Color = Color.FromArgb(236, 120, 121);
 			Graph.Series["표정"].Points[1].Color = Color.FromArgb(136, 182, 191);
 			Graph.Series["표정"].Points[2].Color = Color.FromArgb(236, 120, 121);
-
-
+			this.progressBar1.ShowText = true;
+			this.progressBar1.ForeColor = Color.Black;
 		}
         
         #region * ButtonControls
@@ -48,13 +53,18 @@ namespace Gigachany_2ndWeekUI
             {
                 if (isGraph == false)
                 {
-                    this.SetClientSizeCore(950, 610);
+                    this.SetClientSizeCore(950, 630);
 					Graph.Visible = true;
                     isGraph = true;
-                }
+					SidePanel.Visible = true;
+					SidePanel2.Visible = true;
+					BottomPanel.Visible = true;
+					TopPanel.Visible = true;
+					timer1.Start();
+				}
                 else if (isGraph == true)
                 {
-                    this.SetClientSizeCore(474, 610);
+                    this.SetClientSizeCore(474, 630);
 					Graph.Visible = false;
 					isGraph = false;
                 }
@@ -63,7 +73,7 @@ namespace Gigachany_2ndWeekUI
             }
             else
             {
-                this.SetClientSizeCore(474, 610);
+                this.SetClientSizeCore(474, 630);
                 isGraph = false;
                 MessageBox.Show("불러온 이미지가 없습니다!");
             } 
@@ -80,7 +90,7 @@ namespace Gigachany_2ndWeekUI
         private void Button4_Click(object sender, EventArgs e) // 초기화 버튼
         {
             isImage = false;
-            this.SetClientSizeCore(474, 610);
+            this.SetClientSizeCore(474, 630);
             pictureBox1.Image = new Bitmap(Properties.Resources.Q);
         }
         
@@ -111,7 +121,17 @@ namespace Gigachany_2ndWeekUI
         {
             isMove = false;
         }
-        #endregion
+		#endregion
 
-    }
+		private void timer1_Tick(object sender, EventArgs e)
+		{
+			if (this.progressBar1.Value < 100) this.progressBar1.Value++;
+			else timer1.Stop();
+		}
+
+		private void BottomPanel_Paint(object sender, PaintEventArgs e)
+		{
+
+		}
+	}
 }
